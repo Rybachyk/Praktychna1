@@ -1,0 +1,29 @@
+  GNU nano 7.1                  dokcer-compose.yaml
+
+version: "3"
+
+services:
+  webserver:
+    image: nginx:latest #або apache
+    ports:
+      - "80:80"
+  checker:
+    build: .
+    environment:
+      - MAIL_SERVER=smtp.example.com
+      - MAIL_PORT=587
+      - MAIL_USER=user@example.com
+      - MAIL_PASSWORD=secret
+      - MAIL_FROM=user@example.com
+      - MAIL_TO=user@example.com
+    volumes:
+      - /var/log:/var/log
+    depends_on:
+      - webserver
+    command: >
+      /bin/sh -c '
+      while true; do
+        sleep 30;
+        /usr/local/bin/script.sh;
+      done'
+

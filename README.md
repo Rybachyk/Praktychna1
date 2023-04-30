@@ -1,1 +1,0 @@
-# praktychna1
